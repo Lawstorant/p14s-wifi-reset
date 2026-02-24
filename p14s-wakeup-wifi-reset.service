@@ -1,0 +1,11 @@
+[Unit]
+Description=Reset WiFi adapter after wakeup (Thinkpad T14 G4/P14s G4)
+After=suspend.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/usr/bin/p14s-wifi-reset
+
+[Install]
+WantedBy=multi-user.target suspend.target

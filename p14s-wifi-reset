@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+# 2026 Tomasz Pakuła
+
+CONFIG_PATH="/etc/p14s-wifi-reset.conf"
+SEARCHED="QCNFA765"
+
+# give the computer time to settle
+sleep 1s
+
+# find wireless adapter
+if [[ -f $CONFIG_PATH ]]; then
+    SEARCHED=$(cat $CONFIG_PATH | head -1)
+    echo "Custom search string: $SEARCHED"
+fi
+
+ID=$(lspci | grep "$SEARCHED" | head -1 | cut -d " " -f 1)
+if [[ -z $ID ]]; then
+    echo "Adapter not found!"
+    exit 1
+fi
+
+# remove adapter from pci bus
+tee "/sys/bus/pci/devices/0000:$ID/remove" > /dev/null <<< 1
+sleep 1s
+
+# rescan to re-add adapter to the system
+tee "/sys/bus/pci/rescan" > /dev/null <<< 1
+
+echo "Sucessfully reset $SEARCHED Wi-Fi adapter"
