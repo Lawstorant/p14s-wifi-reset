@@ -32,3 +32,6 @@ To remove the script and disable the service:
 ```shell
 sudo make remove
 ```
+
+## Aur Package
+https://aur.archlinux.org/packages/p14s-wifi-reset-git
