@@ -8,4 +8,4 @@ RemainAfterExit=no
 ExecStart=/usr/bin/p14s-wifi-reset
 
 [Install]
-WantedBy=multi-user.target suspend.target
+WantedBy=suspend.target
