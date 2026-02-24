@@ -5,7 +5,7 @@ CONFIG_PATH="/etc/p14s-wifi-reset.conf"
 SEARCHED="QCNFA765"
 
 # give the computer time to settle
-sleep 1s
+sleep 0.5s
 
 # find wireless adapter
 if [[ -f $CONFIG_PATH ]]; then
@@ -21,7 +21,7 @@ fi
 
 # remove adapter from pci bus
 tee "/sys/bus/pci/devices/0000:$ID/remove" > /dev/null <<< 1
-sleep 1s
+sleep 0.5s
 
 # rescan to re-add adapter to the system
 tee "/sys/bus/pci/rescan" > /dev/null <<< 1
